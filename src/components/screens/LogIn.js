@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { KeyboardAvoidingView, View, Text, StyleSheet, Image, Dimensions, Button, TouchableHighlight, Alert } from "react-native";
 import LoginForm from './LoginForm.js';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 class LogInScreen extends Component {
     static navigationOptions = {
@@ -17,7 +18,9 @@ class LogInScreen extends Component {
                     <Text style={styles.title}>Connect Today</Text>
                 </View>
                 <View style={styles.formContainer}>
-                    <LoginForm />
+                    <LoginForm 
+                    navigation={this.props.navigation}
+                    />
                 </View>
             </KeyboardAvoidingView>
         )

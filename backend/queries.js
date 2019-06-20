@@ -30,12 +30,14 @@ const getUsers = (request, response) => {
   const createUser = (req, res) => {
     var username = req.body.username;
     var password= req.body.password;
-    pool.query("SELECT 1 FROM users WHERE username = $1 AND password = $2", [username, password], (err,row,fields)=>{
+    pool.query("SELECT 1 FROM users WHERE username = $1 AND password = $2", [username, password], (err,results)=>{
         if(err) console.log(err);
-        if(username && password){
+        //what is the return? how do I check the database for accuracy of login?
+        if(results.rowCount > 0){
             res.send({'success':true, 'message': username});
         } else {
-            res.send({'success':false, 'message': 'User not found, please try again'})
+            console.log(results)
+            res.send({'success':false, 'message': "username or password is incorrect"})
         }
     })
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar } from 'react-native';
-
-
+import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, AsyncStorage} from 'react-native';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 export default class LoginForm extends Component {
   constructor(props) {
@@ -25,16 +24,13 @@ export default class LoginForm extends Component {
     })
     .then((response) => response.json())
     .then((response) => {
-      console.warn(response);
-      alert('check the warn')
-      // if (response.success === true) {
-      //   var username = response.message;
-      //   AsyncStorage.setItem('username', username)
-      //   this.props.navigator.push({id: 'Chat'
-      // })
-      // } else {
-      //   alert(response.message)
-      // }
+       if (response.success === true) {
+         var username = response.message;
+         AsyncStorage.setItem('username', username)
+         this.props.navigation.navigate('Chat')
+       } else {
+         alert(response.message)
+      }
     })
     .done()
   }

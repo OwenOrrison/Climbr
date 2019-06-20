@@ -18,13 +18,14 @@ export default class Chat extends Component {
     this.socket.on("chat message", msg => {
         this.setState({ chatMessages: [...this.state.chatMessages, msg] });
     });
+
   }
   submitChatMessage() {
     this.socket.emit("chat message", this.state.chatMessage);
     this.setState({ chatMessage: "" });
   }
   render() {
-      const chatMessages = this.state.chatMessages.map(chatMessage => <Text key={chatMessage}>{chatMessage}</Text>)
+      const chatMessages = this.state.chatMessages.map(chatMessage => <Text style={styles.chatBox} key={chatMessage}>{chatMessage}</Text>)
     return (
       <View
       style={styles.container}
@@ -54,6 +55,13 @@ const styles = StyleSheet.create({
         height: 50,
         borderWidth: 2,
         backgroundColor: "#FFF"
+    },
+    chatBox: {
+      marginTop: 10,
+      backgroundColor: "#FFF",
+      width: 50 + "%",
+      borderWidth: 2,
+
     }
 
 })

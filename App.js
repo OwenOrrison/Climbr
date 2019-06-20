@@ -17,7 +17,7 @@ class App extends React.Component{
   render() {
     return (
       <View>
-        <Text>Hello!</Text>
+        <Climbr />
       </View>
     );
   }
