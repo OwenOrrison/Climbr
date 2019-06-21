@@ -31,7 +31,7 @@ const AppNavigator = createStackNavigator(
     LogIn: LogInScreen,
     Chat: Chat,
     Create: CreateUser,
-    // Threads: Threads,
+    Threads: Threads,
   },
   {
     initialRouteName: "Home"

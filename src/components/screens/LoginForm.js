@@ -27,7 +27,7 @@ export default class LoginForm extends Component {
        if (response.success === true) {
          var username = response.message;
          AsyncStorage.setItem('username', username)
-         this.props.navigation.navigate('Chat', {username})
+         this.props.navigation.navigate('Threads', {username})
        } else {
          alert(response.message)
       }

@@ -28,7 +28,7 @@ export default class CreateUserForm extends Component {
         console.log(response)
          var username = response.username;
          AsyncStorage.setItem('username', username)
-         this.props.navigation.navigate('Chat', {username})
+         this.props.navigation.navigate('Threads', {username})
       })
     .done()
   }

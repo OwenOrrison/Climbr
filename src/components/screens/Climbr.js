@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
         fontSize: 30,
         textAlign: "center",
         color: "#FFF",
-        // flexGrow: 1,
     },
     container: {
         backgroundColor: "#3498db",
@@ -77,7 +76,8 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         backgroundColor: "#2980b9",
-        paddingVertical: 15
+        paddingVertical: 15,
+        marginBottom: 10,
     },
     buttonText: {
         textAlign: "center",
