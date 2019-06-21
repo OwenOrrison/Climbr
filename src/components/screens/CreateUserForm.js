@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Text, StatusBar, AsyncStorage} from 'react-native';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-export default class LoginForm extends Component {
+export default class CreateUserForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -10,8 +10,8 @@ export default class LoginForm extends Component {
         password: ""
     }
   }
-  login = () => {
-    fetch('http://192.168.0.7:3000/users/login', {
+  createUser = () => {
+    fetch('http://192.168.0.7:3000/users', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -22,16 +22,14 @@ export default class LoginForm extends Component {
           password:this.state.password,
         })
     })
-    .then((response) => response.json())
+    .then( (response) => 
+    {console.log(response); return response.json()})
     .then((response) => {
-       if (response.success === true) {
-         var username = response.message;
+        console.log(response)
+         var username = response.username;
          AsyncStorage.setItem('username', username)
          this.props.navigation.navigate('Chat', {username})
-       } else {
-         alert(response.message)
-      }
-    })
+      })
     .done()
   }
   render() {
@@ -65,9 +63,9 @@ export default class LoginForm extends Component {
             value={this.state.password}
         />
         <TouchableOpacity 
-        onPress={this.login}
+        onPress={this.createUser}
         style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>LOGIN</Text>
+            <Text style={styles.buttonText}>CREATE USER</Text>
         </TouchableOpacity>
       </View>
     );

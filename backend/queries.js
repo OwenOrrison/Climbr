@@ -27,7 +27,7 @@ const getUsers = (request, response) => {
     })
   }
 
-  const createUser = (req, res) => {
+  const checkUser = (req, res) => {
     var username = req.body.username;
     var password= req.body.password;
     pool.query("SELECT 1 FROM users WHERE username = $1 AND password = $2", [username, password], (err,results)=>{
@@ -42,16 +42,17 @@ const getUsers = (request, response) => {
     })
 }
 
-//   const createUser = (request, response) => {
-//     const { username, password } = request.body
+  const createUser = (request, response) => {
+    const { username, password } = request.body
   
-//     pool.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], (error, results) => {
-//       if (error) {
-//         throw error
-//       }
-//       response.status(201).send(`User added with ID: ${results.insertId}`)
-//     })
-//   }
+    pool.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, password], (error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log(response)
+      response.status(201).send({username})
+    })
+  }
 
   const updateUser = (request, response) => {
     const id = parseInt(request.params.id)
@@ -86,4 +87,5 @@ const getUsers = (request, response) => {
     createUser,
     updateUser,
     deleteUser,
+    checkUser
   }

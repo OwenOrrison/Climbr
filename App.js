@@ -10,7 +10,9 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import  Climbr  from "./src/components/screens/Climbr.js";
 import LogInScreen from "./src/components/screens/LogIn.js";
-import Chat from "./src/components/screens/Chat"
+import Chat from "./src/components/screens/Chat";
+import CreateUser from "./src/components/screens/CreateUser.js";
+import Threads from "./src/components/screens/Threads.js"
 import {createStackNavigator, createAppContainer} from 'react-navigation';
 
 class App extends React.Component{
@@ -27,7 +29,9 @@ const AppNavigator = createStackNavigator(
   {
     Home: Climbr,
     LogIn: LogInScreen,
-    Chat: Chat  
+    Chat: Chat,
+    Create: CreateUser,
+    // Threads: Threads,
   },
   {
     initialRouteName: "Home"

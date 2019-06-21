@@ -23,6 +23,12 @@ class Climbr extends Component {
                 </View>
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text 
+                    onPress={()=>this.props.navigation.navigate('Create')}
+                    style={styles.buttonText}
+                    >CREATE USER</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonContainer}>
+                    <Text 
                     onPress={()=>this.props.navigation.navigate('LogIn')}
                     style={styles.buttonText}
                     >LOGIN</Text>

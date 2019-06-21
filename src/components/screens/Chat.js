@@ -25,11 +25,15 @@ export default class Chat extends Component {
     this.setState({ chatMessage: "" });
   }
   render() {
-      const chatMessages = this.state.chatMessages.map(chatMessage => <Text style={styles.chatBox} key={chatMessage}>{chatMessage}</Text>)
+      const { navigation } = this.props;
+      const username = navigation.getParam('username', 'climber');
+      const chatMessages = this.state.chatMessages.map(chatMessage => 
+      <Text style={styles.chatBox} key={chatMessage}>{chatMessage} <Text style={styles.username}>-{username}</Text></Text>)
     return (
       <View
       style={styles.container}
       >
+        <Text style={styles.title}>Climbr Meetup</Text>
         <TextInput
         style={styles.textBox} 
         autoCorrect={false}
@@ -46,12 +50,21 @@ export default class Chat extends Component {
 }
 
 const styles = StyleSheet.create({
+    username: {
+      textAlign: "right"
+    },
+    title:{
+      marginTop: 50,
+      textAlign: "center",
+      color: '#FFF',
+      fontSize: 20
+    },
     container:{
         backgroundColor: "#3498db",
         flex: 1
     },
     textBox: {
-        marginTop: 50, 
+        marginTop: 10, 
         height: 50,
         borderWidth: 2,
         backgroundColor: "#FFF"
@@ -61,6 +74,8 @@ const styles = StyleSheet.create({
       backgroundColor: "#FFF",
       width: 50 + "%",
       borderWidth: 2,
+      padding: 10,
+      // borderRadius: 10,
 
     }
 
