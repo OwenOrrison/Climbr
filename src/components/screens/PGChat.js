@@ -10,6 +10,7 @@ export default class PGChat extends Component {
         chatMessages: [],
         messages: [],
     };
+    this.getPG = this.getPG.bind(this);
   }
   static navigationOptions = {
     header: null
@@ -27,20 +28,17 @@ export default class PGChat extends Component {
     this.makeMessage();
   }
   getPG = () => {
-    fetch('http://192.168.0.7:3000/messagesPG/', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            thread: 'PGChat'
-          })
+    fetch('http://192.168.0.7:3000/pg/', {
+        method: 'GET'
   }).then((response) => response.json())
+  .then(messages => {
+    console.warn(messages)
+    this.setState({chatMessages: [...this.state.chatMessages, messages.map(message => message.message)]})
+  })
   .done()
 }
   makeMessage = () => {
-    fetch('http://192.168.0.7:3000/messagesPG/', {
+    fetch('http://192.168.0.7:3000/pg/', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

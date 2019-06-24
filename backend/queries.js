@@ -164,29 +164,32 @@ const getUsers = (request, response) => {
 
 
   ///////PG Messages//////////
-  // const getPg = (request, response) => {
-  //   const thread  = 'PGChat'
-  //   pool.query('SELECT * FROM messages WHERE thread= $1' ,[thread], (error, results) => {
-  //     if (error) {
-  //       throw error,
-  //       console.log(error)
-  //     }
-  //     response.status(200).json(results.rows)
-  //   })
-  // }
+
   const getPg = (request, response) => {
     pool.query('SELECT * FROM messagespg ORDER BY id ASC', (error, results) => {
+      console.log('hello')
       if (error) {
         throw error
       }
       response.status(200).json(results.rows)
     })
   }
+  const createPG = (request, response) => {
+    const { username, message, thread } = request.body
+  
+    pool.query('INSERT INTO messagespg (message, thread, user_id) VALUES ($1, $2, $3)', [message, thread, username], (error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log(request)
+      console.log(response)
+      response.status(201).send({username})
+    })
+  }
 
     ///////PRG Messages//////////
     const getPRG = (request, response) => {
-      const { thread } = request.body
-      pool.query('SELECT * FROM messages WHERE thread= $1' ,[thread], (error, results) => {
+      pool.query('SELECT * FROM messagesprg ORDER BY id ASC' , (error, results) => {
         if (error) {
           throw error
         }
@@ -195,8 +198,7 @@ const getUsers = (request, response) => {
     }
 ///////TCE Messages//////////
   const getTCE = (request, response) => {
-    const { thread } = request.body
-    pool.query('SELECT * FROM messages WHERE thread= $1' ,[thread], (error, results) => {
+    pool.query('SELECT * FROM messagestce ORDER BY id ASC', (error, results) => {
       if (error) {
         throw error
       }
@@ -205,8 +207,7 @@ const getUsers = (request, response) => {
   }
 ///////TCS Messages//////////
     const getTCS = (request, response) => {
-      const { thread } = request.body
-      pool.query('SELECT * FROM messages WHERE thread= $1' ,[thread], (error, results) => {
+      pool.query('SELECT * FROM messagestcs ORDER BY id ASC', (error, results) => {
         if (error) {
           throw error
         }
@@ -215,8 +216,7 @@ const getUsers = (request, response) => {
     }
   ///////TCT Messages//////////
   const getTCT = (request, response) => {
-    const { thread } = request.body
-    pool.query('SELECT * FROM messages WHERE thread= $1' ,[thread], (error, results) => {
+    pool.query('SELECT * FROM messagestct ORDER BY id ASC', (error, results) => {
       if (error) {
         throw error
       }
@@ -245,5 +245,5 @@ const getUsers = (request, response) => {
     getPRG,
     // createMessagesPRG,
     getPg,
-    // createMessagesPG,
+    createPG,
   }
