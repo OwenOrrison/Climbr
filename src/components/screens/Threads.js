@@ -49,6 +49,12 @@ class Threads extends Component {
                     style={styles.buttonText}
                     >THE CIRCUIT - TIGARD</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonContainer}>
+                    <Text 
+                    onPress={()=>this.props.navigation.push('Home')}
+                    style={styles.buttonText}
+                    >LOG OUT</Text>
+                </TouchableOpacity>
             </View>
         )
     }

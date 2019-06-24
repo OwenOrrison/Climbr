@@ -7,8 +7,10 @@ export default class TGEChat extends Component {
     super(props);
     this.state = {
         chatMessage: "",
-        chatMessages: []
+        chatMessages: [],
+        messags: [],
     };
+    this.getTCE = this.getTCE.bind(this);
   }
   static navigationOptions = {
     header: null
@@ -16,19 +18,46 @@ export default class TGEChat extends Component {
   componentDidMount() {
     this.socket= io("http://192.168.0.7:3000");
     this.socket.on("chat message", msg => {
-        this.setState({ chatMessages: [...this.state.chatMessages, msg] });
+        this.setState({ chatMessages: [...this.state.chatMessages, {message: msg, user_id:this.props.navigation.state.params.username}] });
     });
-
+    this.getTCE();
   }
   submitChatMessage() {
     this.socket.emit("chat message", this.state.chatMessage);
     this.setState({ chatMessage: "" });
+    this.makeMessage();
+  }
+  getTCE = () => {
+    fetch('http://192.168.0.7:3000/tce/', {
+        method: 'GET'
+  }).then((response) => response.json())
+  .then(messages => {
+    // console.warn(messages)
+    this.setState({chatMessages: messages})
+  })
+  .done()
+}
+  makeMessage = () => {
+    fetch('http://192.168.0.7:3000/tce/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+        body: JSON.stringify({
+          username: this.props.navigation.state.params.username,
+          message: this.state.chatMessage,
+          thread: 'TCEChat'
+        })
+    })
+    .then((response) => response.json())
+    .done()
   }
   render() {
       const { navigation } = this.props;
       const username = navigation.getParam('username', 'climber');
       const chatMessages = this.state.chatMessages.map(chatMessage => 
-      <Text style={styles.chatBox} key={chatMessage}>{chatMessage} <Text style={styles.username}>-{username}</Text></Text>)
+        <Text style={styles.chatBox} key={chatMessage}>{chatMessage.message} <Text style={styles.username}>-{chatMessage.user_id}</Text></Text>);
     return (
       <View
       style={styles.container}

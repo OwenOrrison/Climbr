@@ -24,14 +24,13 @@ router.delete('/messages/:id', db.deleteMessages)
 
 router.get('/pg', db.getPg)
 router.post('/pg', db.createPG)
-// router.post('/messagespg', db.createMessagesPG)
 router.get('/prg', db.getPRG)
-// router.post('/messages/PRG', db.createMessagesPRG)
+router.post('/prg', db.createPRG)
 router.get('/tce', db.getTCE)
-// router.post('/messages/TCE', db.createMessagesTCE)
+router.post('/tce', db.createTCE)
 router.get('/tcs', db.getTCS)
-// router.post('/messages/TCS', db.createMessagesTCS)
+router.post('/tcs', db.createTCS)
 router.get('/tct', db.getTCT)
-// router.post('/messages/TCT', db.createMessagesTCT)
+router.post('/tct', db.createTCT)
 
 module.exports = router;

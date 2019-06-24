@@ -196,6 +196,18 @@ const getUsers = (request, response) => {
         response.status(200).json(results.rows)
       })
     }
+    const createPRG = (request, response) => {
+      const { username, message, thread } = request.body
+    
+      pool.query('INSERT INTO messagesprg (message, thread, user_id) VALUES ($1, $2, $3)', [message, thread, username], (error, results) => {
+        if (error) {
+          throw error
+        }
+        console.log(request)
+        console.log(response)
+        response.status(201).send({username})
+      })
+    }
 ///////TCE Messages//////////
   const getTCE = (request, response) => {
     pool.query('SELECT * FROM messagestce ORDER BY id ASC', (error, results) => {
@@ -203,6 +215,18 @@ const getUsers = (request, response) => {
         throw error
       }
       response.status(200).json(results.rows)
+    })
+  }
+  const createTCE = (request, response) => {
+    const { username, message, thread } = request.body
+  
+    pool.query('INSERT INTO messagestce (message, thread, user_id) VALUES ($1, $2, $3)', [message, thread, username], (error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log(request)
+      console.log(response)
+      response.status(201).send({username})
     })
   }
 ///////TCS Messages//////////
@@ -214,6 +238,18 @@ const getUsers = (request, response) => {
         response.status(200).json(results.rows)
       })
     }
+    const createTCS = (request, response) => {
+      const { username, message, thread } = request.body
+    
+      pool.query('INSERT INTO messagestcs (message, thread, user_id) VALUES ($1, $2, $3)', [message, thread, username], (error, results) => {
+        if (error) {
+          throw error
+        }
+        console.log(request)
+        console.log(response)
+        response.status(201).send({username})
+      })
+    }
   ///////TCT Messages//////////
   const getTCT = (request, response) => {
     pool.query('SELECT * FROM messagestct ORDER BY id ASC', (error, results) => {
@@ -221,6 +257,18 @@ const getUsers = (request, response) => {
         throw error
       }
       response.status(200).json(results.rows)
+    })
+  }
+  const createTCT = (request, response) => {
+    const { username, message, thread } = request.body
+  
+    pool.query('INSERT INTO messagestct (message, thread, user_id) VALUES ($1, $2, $3)', [message, thread, username], (error, results) => {
+      if (error) {
+        throw error
+      }
+      console.log(request)
+      console.log(response)
+      response.status(201).send({username})
     })
   }
 
@@ -237,13 +285,13 @@ const getUsers = (request, response) => {
     updateMessages,
     deleteMessages,
     getTCT,
-    // createMessagesTCT,
+    createTCT,
     getTCS,
-    // createMessagesTCS,
+    createTCS,
     getTCE,
-    // createMessagesTCE,
+    createTCE,
     getPRG,
-    // createMessagesPRG,
+    createPRG,
     getPg,
     createPG,
   }

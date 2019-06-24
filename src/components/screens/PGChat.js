@@ -18,7 +18,7 @@ export default class PGChat extends Component {
   componentDidMount() {
     this.socket= io("http://192.168.0.7:3000");
     this.socket.on("chat message", msg => {
-        this.setState({ chatMessages: [...this.state.chatMessages, msg] });
+        this.setState({ chatMessages: [...this.state.chatMessages, {message: msg, user_id:this.props.navigation.state.params.username}] });
     });
     this.getPG();
   }
@@ -32,8 +32,9 @@ export default class PGChat extends Component {
         method: 'GET'
   }).then((response) => response.json())
   .then(messages => {
-    console.warn(messages)
-    this.setState({chatMessages: [...this.state.chatMessages, messages.map(message => message.message)]})
+    // console.warn(messages)
+    this.setState({chatMessages: messages})
+    // console.warn(this.state.chatMessages)
   })
   .done()
 }
@@ -57,7 +58,7 @@ export default class PGChat extends Component {
       const { navigation } = this.props;
       const username = navigation.getParam('username', 'climber');
       const chatMessages = this.state.chatMessages.map(chatMessage => 
-      <Text style={styles.chatBox} key={chatMessage}>{chatMessage} <Text style={styles.username}>-{username}</Text></Text>)
+      <Text style={styles.chatBox} key={chatMessage}>{chatMessage.message} <Text style={styles.username}>-{chatMessage.user_id}</Text></Text>)
     return (
       <View
       style={styles.container}
