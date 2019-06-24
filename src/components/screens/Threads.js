@@ -21,31 +21,31 @@ class Threads extends Component {
                 </View>
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text 
-                    onPress={()=>this.props.navigation.push('Chat', {username})}
+                    onPress={()=>this.props.navigation.push('PRGChat', {username})}
                     style={styles.buttonText}
                     >PORTLAND ROCK GYM</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text 
-                    onPress={()=>this.props.navigation.push('Chat', {username})}
+                    onPress={()=>this.props.navigation.push('PGChat', {username})}
                     style={styles.buttonText}
                     >PLANET GRANITE</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text 
-                    onPress={()=>this.props.navigation.push('Chat', {username})}
+                    onPress={()=>this.props.navigation.push('TCEChat', {username})}
                     style={styles.buttonText}
                     >THE CIRCUIT - EAST</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text 
-                    onPress={()=>this.props.navigation.push('Chat', {username})}
+                    onPress={()=>this.props.navigation.push('TCSChat', {username})}
                     style={styles.buttonText}
                     >THE CIRCUIT - SOUTH</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.buttonContainer}>
                     <Text 
-                    onPress={()=>this.props.navigation.push('Chat', {username})}
+                    onPress={()=>this.props.navigation.push('TCTChat', {username})}
                     style={styles.buttonText}
                     >THE CIRCUIT - TIGARD</Text>
                 </TouchableOpacity>
